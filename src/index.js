@@ -1,5 +1,5 @@
-import { fetchBreeds } from "./cat-api";
-import { fetchCatByBreed } from "./cat-api";
+import { fetchBreeds } from "./JS/cat-api";
+import { fetchCatByBreed } from "./JS/cat-api";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import SlimSelect from 'slim-select';
 
