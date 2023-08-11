@@ -3,7 +3,6 @@ import { fetchCatByBreed } from "./cat-api";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import SlimSelect from 'slim-select';
 
-
 const container = document.querySelector('.cat-info');
 const select = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
@@ -15,16 +14,17 @@ loader.classList.remove('is-hidden');
 errorLoad.classList.add('is-hidden');
 
 fetchBreeds().then (function(data) {
-    const markUp = data.map(({ name, id }) => `<option value="${id}">${name}</option>`).join();
+    const markUp = data.map(({ name, id }) => `<option value="${id}">${name}</option>`).join('');
     select.insertAdjacentHTML('beforeend', markUp);
-    
+    new SlimSelect({
+        select: '#selectElement'
+      })
 })
     .catch(function (error) {
         errorLoad.classList.remove('is-hidden');
         Report.failure('Error!', 'Try reloading the page!');  
 })
     .finally(() => loader.classList.add('is-hidden'))
-
 
 function onChange(event) {
     let id = event.target.value;
@@ -47,7 +47,6 @@ function onChange(event) {
             container.innerHTML = '';
             Report.failure('Error!', 'Try reloading the page!');
         })
-    .finally(() => loader.classList.add('is-hidden'))
-    
+    .finally(() => loader.classList.add('is-hidden')) 
 };
     
